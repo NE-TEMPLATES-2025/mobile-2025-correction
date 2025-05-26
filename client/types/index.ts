@@ -130,4 +130,10 @@ export interface PostsResponse {
 
 
 
+export interface CustomAddButtonProps {
+  containerStyle?: string;
+
+  onPress: () => void;
+
+}
 

@@ -3,5 +3,20 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-  }
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "javascript",
+    "typescript": "typescript",
+    "typescriptreact": "typescript"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["className\\s*=\\s*\"([^\"]*)", 1],
+    ["className=\\{`([^`]*)`\\}", 1],
+    ["tw\\s*=\\s*\"([^\"]*)", 1],
+    ["tw=\\{`([^`]*)`\\}", 1]
+  ]
 }

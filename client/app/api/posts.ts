@@ -70,6 +70,7 @@ const editPost= async(id:number,title:string,body:string)=>{
         throw new Error("Failed to edit post");
     }
 }
+
 const deletePost = async(id:number)=>{
     try {
         await fakePostsApiClient.delete(`/${id}`);
@@ -79,6 +80,7 @@ const deletePost = async(id:number)=>{
         throw new Error("Failed to delete post");
     }
 }
+
 export default {
     getAllPosts,
     createPost,
@@ -86,3 +88,4 @@ export default {
     getPostById,
     editPost
 }
+

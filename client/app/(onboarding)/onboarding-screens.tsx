@@ -5,6 +5,7 @@ import Swiper from "react-native-swiper"
 import { ChevronLeft, ChevronLeftBlue } from '@/assets/svgs'
 import { router } from 'expo-router'
 import CustomButton from '@/components/CustomButton'
+import CustomAddButton from '@/components/CustomAddButton'
 const Onboarding = () => {
 
   const[activeIndex,setActiveIndex]= useState(0)
@@ -15,7 +16,8 @@ const Onboarding = () => {
     <SafeAreaView className=' w-full h-full bg-secondary py-6'>
       <View className=' flex flex-row justify-end px-6'>
       <TouchableOpacity onPress={()=> router.push("/(onboarding)/login")}>
-        <Text className=' text-dark font-semibold text-[16px]'>Skip</Text>
+        {/* <Text className=' text-dark font-semibold text-[16px]'>Skip</Text> */}
+        <CustomAddButton onPress={()=>{}}/>
       </TouchableOpacity>
 
       </View>

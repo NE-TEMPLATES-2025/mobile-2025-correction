@@ -1,4 +1,3 @@
-import axios from "axios";
 import { protectedApiClient } from "./apiClient";
 import type { CreateParkingResponse, Parking, ParkingResponse, ParkingsResponse } from "@/types";
 
