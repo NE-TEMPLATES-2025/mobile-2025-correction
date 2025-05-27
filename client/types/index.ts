@@ -75,7 +75,7 @@ export interface Expense{
 
 
 export interface CreateExpenseInput{
-
+   id:string;
    name: string;
   amount: string;
   description: string;
@@ -88,3 +88,11 @@ export interface CreateExpenseResponse {
   data: Expense;
 }
 
+
+
+export interface User{
+    id: string;
+  username: string;
+  password: string;
+  createdAt: string;
+}

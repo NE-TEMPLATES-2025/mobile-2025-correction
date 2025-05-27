@@ -4,6 +4,7 @@ import { Alert, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDeleteExpenseMutation, useGetExpenseByIdQuery } from '@/react-query/queriesAndMutations'
 import CustomButton2 from '@/components/CustomButton2'
+import Entypo from '@expo/vector-icons/Entypo'
 
 const ExpenseDetails = () => {
   const { id } = useLocalSearchParams()
@@ -35,6 +36,17 @@ const ExpenseDetails = () => {
 
   return (
     <SafeAreaView className="bg-secondary flex-1 px-6 pt-6">
+
+         <View className="flex flex-row justify-center items-center w-full mb-4">
+                    <Text className="text-2xl font-semibold">Expense Details</Text>
+                    <Entypo
+                    onPress={()=>router.back()}
+                        style={{ position: 'absolute', left: 0 }}
+                        name="chevron-left"
+                        size={30}
+                        color="black"
+                    />
+                </View>
       <View className="bg-white p-4 rounded-xl space-y-4">
         <Text className="text-xl font-bold text-blue-400">{expense.name}</Text>
         <Text className="text-base text-dark">{expense.description}</Text>
@@ -45,7 +57,7 @@ const ExpenseDetails = () => {
         <CustomButton2
           onPress={handleDelete}
           title={isDeleting ? "Deleting..." : "Delete Expense"}
-          containerStyle="px-6 py-3"
+          containerStyle="px-6 py-3 bg-red-600"
         />
       </View>
     </SafeAreaView>

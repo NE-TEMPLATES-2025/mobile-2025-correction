@@ -18,9 +18,11 @@ const getAllExpenses= async ()=>{
     }
 }
 
- const createExpense = async ({ name,description,amount}:CreateExpenseInput)=>{
+ const createExpense = async ({id, name,description,amount}:CreateExpenseInput)=>{
     try {
         const response= await protectedApiClient.post<Expense>('/expenses',{
+            id,
+         
             name,
             description,
             amount

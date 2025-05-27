@@ -1,3 +1,4 @@
+import { User } from "@/types";
 import * as SecureStore from "expo-secure-store";
 import {jwtDecode} from "jwt-decode"
 
@@ -40,22 +41,19 @@ const removeToken= async ()=>{
     }
 }
 
-const getUser = async ()=>{
-    try {
-        
-       return await SecureStore.getItemAsync(userKey);
-    } catch (error) {
-        console.error("Error while getting the user");
-    }
+const getUser = async () => {
+  try {
+    const userJson = await SecureStore.getItemAsync(userKey);
+    if (!userJson) return null;
+    return JSON.parse(userJson);
+  } catch (error) {
+    console.error("Error while getting the user", error);
     return null;
-}
+  }
+};
 
-const storeUser = async (user: {
-  id: string;
-  username: string;
-  password: string;
-  createdAt: string;
-}) => {
+
+const storeUser = async (user:User) => {
   try {
     await SecureStore.setItemAsync(userKey, JSON.stringify(user));
   } catch (error) {

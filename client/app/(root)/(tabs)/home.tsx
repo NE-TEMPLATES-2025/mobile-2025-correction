@@ -22,8 +22,11 @@ import {
 } from "@/react-query/queriesAndMutations";
 
 const Home = () => {
- const { user } = useAppSelector((state) => state.user);
+ 
+const { user } = useAppSelector((state) => state.user);
+  console.log(user);
 
+  // State for search input and selected filter
  const[searchValue,setSearchValue]= useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
 
@@ -35,16 +38,12 @@ const Home = () => {
   } = useGetAllExpensesQuery();
 
 
-
   const expenseFilters = ["All", ...data.categories.map((c) => c.title)];
 
 
   const handleSelectFilter = (title: string) => {
     setSelectedFilter(title);
   };
-
-
-
 
   return (
     <SafeAreaView className="bg-secondary flex-1">
@@ -57,11 +56,11 @@ const Home = () => {
           <View className="w-full flex-row items-center justify-between mb-10">
             <View className="flex-col gap-2">
               <Text className="text-dark text-2xl font-semibold">
-                Hi, {user?.username}
+                Hi {user?.username || "User"}!, 
               </Text>
               <View className="flex-col gap-0">
                 <Text className="font-semibold text-[13px] text-gray-5">
-                  Where do you want to park Today?
+                  Welcome to your Expense Tracker
                 </Text>
                 <Text className="font-semibold text-[13px] text-gray-5">
                   Search Below.

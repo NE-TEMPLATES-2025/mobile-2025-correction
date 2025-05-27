@@ -5,14 +5,8 @@ import { useState } from 'react';
 
 export default function HomeScreen() {
 
-  const[initialized,setInitialized]= useState(false);
-  const dispatch= useAppDispatch();
 
   const {token,user,isLoading}= useAppSelector((state)=> state.user);
-
-  
-
-
    if(isLoading) return null;
 
 if(!token) return <Redirect href="/(onboarding)/onboarding-screens"/>

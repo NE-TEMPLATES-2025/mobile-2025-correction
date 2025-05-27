@@ -2,6 +2,7 @@ import CustomAddButton from '@/components/CustomAddButton'
 import CustomButton2 from '@/components/CustomButton2'
 import CustomInput from '@/components/CustomInput'
 import { useCreateExpenseMutation, useGetAllExpensesQuery } from '@/react-query/queriesAndMutations'
+import { useAppSelector } from '@/redux/store'
 import Entypo from '@expo/vector-icons/Entypo'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
@@ -11,6 +12,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Expenses = () => {
 
+     const { user } = useAppSelector((state) => state.user);
+     console.log(user);
+     
+    
     const [isVisible, setIsVisible] = useState(false);
     const [form, setForm] = useState({
         name: '',
@@ -24,26 +29,44 @@ const Expenses = () => {
         isError: isErrorAll,
     } = useGetAllExpensesQuery()
 
-    const { data: expense, mutateAsync: createExpense, isError: error, isPending, isSuccess } = useCreateExpenseMutation()
+    const { mutateAsync: createExpense, isError: error, isPending, isSuccess } = useCreateExpenseMutation()
 
 
-    const handleAddExpense = async () => {
-        try {
+const handleAddExpense = async () => {
+  const { name, description, amount } = form;
 
-            await createExpense(form);
-            setIsVisible(false);
-            setForm({
-                name: '',
-                description: '',
-                amount: ''
-            });
+  // Basic validation
+  if (!name.trim() || !description.trim() || !amount.trim()) {
+    alert("All fields are required.");
+    return;
+  }
 
-        } catch (error) {
-            console.error("Error adding expense:", error);
+  const parsedAmount = parseFloat(amount);
 
-        }
+  if (isNaN(parsedAmount) || parsedAmount <= 0) {
+    alert("Please enter a valid positive amount.");
+    return;
+  }
 
-    }
+  try {
+    await createExpense({
+      ...form,
+      amount: parsedAmount.toFixed(2),
+      id: (expenses!.length + 1).toString(),
+    });
+
+    setIsVisible(false);
+    setForm({
+      name: '',
+      description: '',
+      amount: '',
+    });
+  } catch (error) {
+    console.error("Error adding expense:", error);
+    alert("Something went wrong while creating the expense.");
+  }
+};
+
     return (
         <SafeAreaView className="bg-secondary flex-1">
             <View className="flex-1 relative px-6 pt-6 pb-8">
@@ -134,7 +157,7 @@ const Expenses = () => {
 
                         />
 
-                        <CustomButton2 onPress={handleAddExpense}  title='Create' />
+                        <CustomButton2 containerStyle='bg-blue-600' onPress={handleAddExpense}  title='Create' />
                     </View>
                     <TouchableOpacity  onPress={() => setIsVisible(false)} className='absolute top-4 right-4'>
 

@@ -9,7 +9,7 @@ const CustomButton2 = ({onPress,
     title}:CustomButtonProps) => {
   return (
     <TouchableOpacity 
-    className={`flex flow-row bg-blue-600  items-center justify-center text-center py-3 ${containerStyle} rounded-lg`}
+    className={`flex flow-row   items-center justify-center text-center py-3 ${containerStyle} rounded-lg`}
     onPress={onPress}
     
     >
