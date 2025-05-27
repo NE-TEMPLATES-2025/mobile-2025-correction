@@ -40,7 +40,6 @@ const handleAddExpense = async () => {
     alert("All fields are required.");
     return;
   }
-
   const parsedAmount = parseFloat(amount);
 
   if (isNaN(parsedAmount) || parsedAmount <= 0) {
