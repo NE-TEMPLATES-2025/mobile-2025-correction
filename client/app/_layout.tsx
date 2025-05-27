@@ -6,8 +6,8 @@ import "react-native-reanimated";
 import { Provider } from "react-redux";
 
 
-// import store, { useAppDispatch } from "@/redux/store";
-// import { loadUserFromStorage } from "@/redux/userSlice";
+import store, { useAppDispatch } from "@/redux/store";
+import { loadUserFromStorage } from "@/redux/userSlice";
 
 import "../global.css";
 
@@ -29,20 +29,20 @@ export default function RootLayout() {
     return null;
   }
 
-  // const AppInitializer= ({children}:{children:React.ReactNode})=>{
-  //   const dispatch= useAppDispatch();
+  const AppInitializer= ({children}:{children:React.ReactNode})=>{
+    const dispatch= useAppDispatch();
 
-  //   useEffect(()=>{
-  //     dispatch(loadUserFromStorage());
-  //   },[])
+    useEffect(()=>{
+      dispatch(loadUserFromStorage());
+    },[])
 
-  //   return <>{children}</>
-  // }
+    return <>{children}</>
+  }
 
 
   return (
-    // <Provider store={store}>
-    //   <AppInitializer>
+    <Provider store={store}>
+      <AppInitializer>
 
       <Stack
         screenOptions={{
@@ -53,7 +53,7 @@ export default function RootLayout() {
         <Stack.Screen name="(onboarding)" />
         <Stack.Screen name="(root)" />
       </Stack>
-    //   </AppInitializer>
-    // </Provider>
+      </AppInitializer>
+    </Provider>
   );
 }

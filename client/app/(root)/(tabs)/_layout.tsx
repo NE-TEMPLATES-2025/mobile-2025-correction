@@ -1,10 +1,11 @@
 import { Tabs } from "expo-router";
 import React from "react";
 
-import Feather from "@expo/vector-icons/Feather";
-import AntDesign from "@expo/vector-icons/AntDesign";
+
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { StyleSheet } from "react-native";
+
+import Fontisto from '@expo/vector-icons/Fontisto';
 
 const TabsLayout = () => {
   return (
@@ -30,13 +31,14 @@ const TabsLayout = () => {
           title: "Home",
         }}
       />
-      <Tabs.Screen
-        name="parking"
+        <Tabs.Screen
+        name="expenses"
         options={{
-          title: "Parking",
-          tabBarIcon: ({color,size})=> <Feather name="clock" size={size} color={color} />
+          title: "Expenses",
+          tabBarIcon: ({color,size})=><Fontisto name="money-symbol" size={size} color={color} />,
         }}
       />
+
 
       <Tabs.Screen
         name="profile"

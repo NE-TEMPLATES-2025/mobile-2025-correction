@@ -1,23 +1,23 @@
 import { Lesson,Lifetime,MobilePhone,Quiz,AudioSvg,RiseSvg } from "@/assets/svgs";
 import Rise from "@/assets/svgs/Rise";
 
- const onboarding =[
-    {
-        id:1,
-        title:"Online Learning",
-        description:"We Provide Classes Online Classes and Pre Recorded Leactures.!"
-    },
-    {
-        id:2,
-        title:"Learn from Anytime",
-        description:"Booked or Same the Lectures for Future"
-    },
-    {
-        id:3,
-        title:"Get Online Certificate",
-        description:"Analyse your scores and Track your results"
-    }
-]
+const onboarding = [
+  {
+    id: 1,
+    title: "Track Your Expenses",
+    description: "Easily log your daily spending and see where your money goes in real-time.",
+},
+  {
+    id: 2,
+    title: "Set Budgets & Goals",
+    description: "Plan your finances with custom budgets and get alerts before you overspend.",
+  },
+  {
+    id: 3,
+    title: "View Reports & Insights",
+    description: "Analyze your spending habits with charts and detailed summaries.",
+  }
+];
 
 
 const achievements =[

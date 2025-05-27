@@ -16,8 +16,7 @@ const Onboarding = () => {
     <SafeAreaView className=' w-full h-full bg-secondary py-6'>
       <View className=' flex flex-row justify-end px-6'>
       <TouchableOpacity onPress={()=> router.push("/(onboarding)/login")}>
-        {/* <Text className=' text-dark font-semibold text-[16px]'>Skip</Text> */}
-        <CustomAddButton onPress={()=>{}}/>
+        <Text className=' text-dark font-semibold text-[16px]'>Skip</Text>
       </TouchableOpacity>
 
       </View>

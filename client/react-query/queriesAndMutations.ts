@@ -1,85 +1,79 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { QUERY_KEYS } from "./queryKey"
-import { createParking, getAllParkings, searchParking } from "@/app/api/parking"
-import { getCarMovements, registerCarEntry, registerCarExit } from "@/app/api/car_movement";
+import expenses from "@/app/api/expenses";
+import { CreateExpenseInput } from "@/types";
 
 
-interface CreateParkingInput {
-  code: string;
-  parkingName: string;
-  availableSpaces: number;
-  location:string;
-  chargingFeePerHour: number;
-  userId: string;
-}
 
-interface RegisterCarEntryInput {
-  plateNumber:string;
-    parkingCode:string;
-    entryDateTime:string
-}
 
-interface RegisterCarExitInput {
-  car_entry_id:string;
-    exitDateTime:string
-}
 
-export const useGetAllParkings= ()=>{
+// export const useCreateParkingMutation= ()=>{
+//     const queryClient= useQueryClient();
+//     return useMutation( {
+//         mutationFn: async ({code,parkingName,availableSpaces,location,chargingFeePerHour,userId}:CreateParkingInput)=>createParking(
+//             code,
+//             parkingName,
+//             availableSpaces,
+//             location,
+//             chargingFeePerHour,
+//             userId
+//         ),
+//         onSuccess: ()=>{
+//      queryClient.invalidateQueries({
+//         queryKey:[QUERY_KEYS.GET_ALL_PARKINGS]
+//      })
+//         }
+//     })
+// }
+
+
+
+// export const useRegisterCarEntryMutation= ()=>{
+//     return useMutation({
+//         mutationFn: ({plateNumber,parkingCode,entryDateTime}:RegisterCarEntryInput)=>registerCarEntry(plateNumber,parkingCode,entryDateTime)
+//     })
+// }
+
+
+
+
+export const useGetAllExpensesQuery = () => {
     return useQuery({
-        queryKey: [QUERY_KEYS.GET_ALL_PARKINGS],
-        queryFn: ()=> getAllParkings()
-    })
+        queryKey: [QUERY_KEYS.GET_ALL_EXPENSES],
+        queryFn: ()=>expenses.getAllExpenses(),
+        refetchOnWindowFocus: false,
+    });
 }
 
-export const useGetSearchedParkings = (query:string)=>{
+export const useGetExpenseByIdQuery = (id: number) => {
     return useQuery({
-        queryKey:[QUERY_KEYS.GET_SEARCHED_PARKINGS],
-        queryFn :()=> searchParking(query),
-        enabled: query.trim().length > 0
-    })
+        queryKey: [QUERY_KEYS.GET_EXPENSE_BY_ID, id],
+        queryFn: () => expenses.getExpenseById(id),
+        refetchOnWindowFocus: false,
+    });
 }
 
-
-
-
-
-export const useCreateParkingMutation= ()=>{
-    const queryClient= useQueryClient();
-    return useMutation( {
-        mutationFn: async ({code,parkingName,availableSpaces,location,chargingFeePerHour,userId}:CreateParkingInput)=>createParking(
-            code,
-            parkingName,
-            availableSpaces,
-            location,
-            chargingFeePerHour,
-            userId
-        ),
-        onSuccess: ()=>{
-     queryClient.invalidateQueries({
-        queryKey:[QUERY_KEYS.GET_ALL_PARKINGS]
-     })
-        }
-    })
-}
-
-
-
-export const useRegisterCarEntryMutation= ()=>{
+export const useCreateExpenseMutation = () => {
+    const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({plateNumber,parkingCode,entryDateTime}:RegisterCarEntryInput)=>registerCarEntry(plateNumber,parkingCode,entryDateTime)
-    })
+        mutationFn: (data: CreateExpenseInput) => expenses.createExpense(data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.GET_ALL_EXPENSES],
+            });
+        },
+    });
 }
 
-export const useRegisterCarExitMutation= ()=>{
+
+export const useDeleteExpenseMutation = () => {
+    const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({car_entry_id,exitDateTime}:RegisterCarExitInput)=>registerCarExit(car_entry_id,exitDateTime)
-    })
-}
-
-
-export const useGetAllCarMovements= ()=>{
-    return useQuery({
-        queryKey:[QUERY_KEYS.GET_ALL_CAR_MOVEMENTS],
-        queryFn:()=> getCarMovements()
-    })
+        mutationFn: (id: number) => expenses.deleteExpense(id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.GET_ALL_EXPENSES],
+            });
+        },
+    });
 }

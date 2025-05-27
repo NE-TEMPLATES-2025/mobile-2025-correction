@@ -37,81 +37,6 @@ export  interface OTPInputProps {
 
 
 
-type RegisterResponse ={
-  message: string;
-  status: number;
-  data:{
-    id:string;
-    firstName:string;
-    lastName:string;
-    email:string;
-    password:string;
-    role:string;
-    createdAt:string;
-    updatedAt:string;
-  }
-}
-
-export type Parking=  {
-    code:string;
-    parkingName: string;
-    availableSpaces:number;
-    chargingFeePerHour: number;
-    
-}
-
-export type ParkingsResponse ={
-  
-  message: string;
-  status: number;
-  data:Parking[];
-}
-
-export type ParkingResponse= {
-     code:string;
-    parkingName: string;
-    availableSpaces:number;
-    chargingFeePerHour: number;
-    location:string;
-    userId:string
-    
-}
-
-export type CreateParkingResponse ={
-  message: string;
-  status: number
-  data: ParkingResponse;
-}
-
-
-export type CarMovement ={
-   plateNumber: string
-  parkingCode: string
-  entryDateTime:string
-  exitDateTime:string
-  chargedAmount: number
-}
-export type RegisterCarEntryResponse ={
-
-  message:string;
-  status:number;
-  data: CarMovement
-}
-
-export type RegisterCarExitResponse ={
-
-  message:string;
-  status:number;
-  data: CarMovement
-}
-
-export type CarMovementsResponse= {
-   message:string;
-  status:number;
-  data: CarMovement[]
-}
-
-
 
 export interface Post{
 
@@ -135,5 +60,29 @@ export interface CustomAddButtonProps {
 
   onPress: () => void;
 
+}
+
+
+export interface Expense{
+  id: number;
+  name: number;
+  amount: number;
+  description: string;
+}
+
+
+
+export interface CreateExpenseInput{
+
+   name: number;
+  amount: number;
+  description: string;
+
+}
+
+export interface CreateExpenseResponse {
+  message: string;
+  status: number;
+  data: Expense;
 }
 

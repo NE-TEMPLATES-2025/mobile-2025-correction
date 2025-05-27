@@ -1,7 +1,7 @@
 import axios from "axios"
 import storage from "../(onboarding)/storage"
 export const server= {
-    baseUrl: `http://10.12.73.224:4000/api/v1`
+    baseUrl: `https://67ac71475853dfff53dab929.mockapi.io/api/v1`
 }
 
 export const apiClient= axios.create({
@@ -21,10 +21,3 @@ export const protectedApiClient = axios.create({
     }
 })
 
-export const fakePostsApiClient = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/posts",
-    headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-    }
-})

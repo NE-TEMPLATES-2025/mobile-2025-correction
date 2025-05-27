@@ -16,51 +16,34 @@ import {
 } from "@/assets/svgs";
 import SearchInput from "@/components/SearchInput";
 import { data } from "@/constants";
-// import { useAppSelector } from "@/redux/store";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useAppSelector } from "@/redux/store";
 import {
-  useGetAllParkings,
-  useGetSearchedParkings,
+  useGetAllExpensesQuery,
 } from "@/react-query/queriesAndMutations";
 
 const Home = () => {
-  // const { user } = useAppSelector((state) => state.user);
+ const { user } = useAppSelector((state) => state.user);
 
-  const [searchValue, setSearchValue] = useState("");
+ const[searchValue,setSearchValue]= useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
 
-  const debouncedSearch = useDebounce(500, searchValue);
 
   const {
-    data: allParkings,
+    data: expenses,
     isLoading: isLoadingAll,
     isError: isErrorAll,
-  } = useGetAllParkings();
+  } = useGetAllExpensesQuery();
 
-  const {
-    data: searchedParkings,
-    isLoading: isLoadingSearch,
-    isError: isErrorSearch,
-  } = useGetSearchedParkings(searchValue);
 
-  
 
-  const parkingFilters = ["All", ...data.categories.map((c) => c.title)];
+  const expenseFilters = ["All", ...data.categories.map((c) => c.title)];
 
-const isSearching = debouncedSearch.trim().length > 0;
-const displayedParkings = isSearching ? searchedParkings ?? [] : allParkings ?? [];
 
   const handleSelectFilter = (title: string) => {
     setSelectedFilter(title);
   };
 
 
-  console.log("Searched Parkings",searchedParkings);
-
-useEffect(() => {
-
-  console.log("Debounced Search:", debouncedSearch);
-}, [debouncedSearch,searchValue]);
 
 
   return (
@@ -74,7 +57,7 @@ useEffect(() => {
           <View className="w-full flex-row items-center justify-between mb-10">
             <View className="flex-col gap-2">
               <Text className="text-dark text-2xl font-semibold">
-                Hi, Paccy
+                Hi, {user?.username}
               </Text>
               <View className="flex-col gap-0">
                 <Text className="font-semibold text-[13px] text-gray-5">
@@ -121,13 +104,13 @@ useEffect(() => {
           </View>
 
           {/* Filter Chips */}
-          <Text className="text-xl font-bold mb-3">Parkings For You</Text>
+          <Text className="text-xl font-bold mb-3">Expenses history For You</Text>
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             className="mb-4"
           >
-            {parkingFilters.map((filter, index) => (
+            {expenseFilters.map((filter, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() => handleSelectFilter(filter)}
@@ -149,26 +132,19 @@ useEffect(() => {
           </ScrollView>
 
           {/* Parking List */}
-          {isLoadingAll || isLoadingSearch ? (
+          {isLoadingAll ? (
             <Text className="text-center text-gray-500 mt-4">Loading...</Text>
-          ) : isErrorAll || isErrorSearch ? (
-            <Text className="text-center text-red-500 mt-4">
-              Failed to load parkings.
-            </Text>
-          ) : displayedParkings && displayedParkings.length === 0 ? (
-            <Text className="text-center text-gray-500 mt-4">
-              No parkings found for "{debouncedSearch}"
-            </Text>
+          
           ) : (
             <FlatList
-              data={displayedParkings}
-              keyExtractor={(item) => item.code.toString()}
+              data={expenses}
+              keyExtractor={(item) => item.id.toString()}
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{
                 flexGrow: 1,
                 justifyContent:
-                  displayedParkings!.length === 1 ? "center" : "flex-start",
+                  expenses!.length === 1 ? "center" : "flex-start",
               }}
               className="mb-6"
               renderItem={({ item }) => (
@@ -181,21 +157,18 @@ useEffect(() => {
                     <View className="w-full px-3 py-2">
                       <View className="flex-row justify-between items-center mb-3">
                         <Text className="text-orange-1 font-semibold">
-                          {item.parkingName}
+                          {item.name}
                         </Text>
                         <Bookmark />
                       </View>
                       <Text className="text-dark font-semibold text-[16px] mb-2">
-                        {item.code}
+                        {item.amount}
                       </Text>
                       <View className="flex-row gap-3 items-center">
                         <Text className="font-bold text-[15px] text-primary">
-                          ${item.chargingFeePerHour}
+                          ${item.description}
                         </Text>
                         <View className="h-[16px] w-[2px] bg-black" />
-                        <Text className="text-[12px] font-bold text-dark">
-                          {item.availableSpaces} Spaces available
-                        </Text>
                       </View>
                     </View>
                   </View>
