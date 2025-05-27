@@ -15,7 +15,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
 import { useDebounce } from "@/hooks/useDebounce";
-// import { logout } from "@/redux/userSlice";
+import { logout } from "@/redux/userSlice";
 
 
 const Settings = () => {
@@ -28,7 +28,7 @@ const Settings = () => {
 
     const handleLogout = () => {
       router.replace("/(onboarding)/login");
-      // dispatch(logout());
+       dispatch(logout());
     };
   
   useEffect(() => {

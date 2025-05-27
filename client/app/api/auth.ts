@@ -1,8 +1,9 @@
+import { User } from "@/types";
 import { apiClient } from "./apiClient";
 
 const login = async (email: string, password: string) => {
   try {
-    const response = await apiClient.get(`/users?username=${email}`);
+    const response = await apiClient.get<User[]>(`/users?username=${email}`);
 
     const users = response.data;
 

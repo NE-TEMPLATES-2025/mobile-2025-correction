@@ -47,9 +47,7 @@ const handleLogin = async () => {
   await storage.storeUser(user);
 
   // Load user from storage and dispatch
-
-  const storedUser = await storage.getUser();
-  dispatch(loginSuccess({ token, user:storedUser }));
+  dispatch(loginSuccess({ token, user }));
 
   alert("Login successful!");
   router.replace("/(root)/(tabs)/home");

@@ -12,8 +12,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Expenses = () => {
 
-     const { user } = useAppSelector((state) => state.user);
-     console.log(user);
+     const { user,token } = useAppSelector((state) => state.user);
+     console.log(token);
      
     
     const [isVisible, setIsVisible] = useState(false);
