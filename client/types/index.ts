@@ -3,7 +3,7 @@ import { ButtonProps, TextInput, TextInputProps } from "react-native";
 
 
 export interface CustomButtonProps extends ButtonProps {
-    containerStyle: string;
+    containerStyle?: string;
     iconRight?: any;
     textStyle?: any;
     backgroundColor? : string;
@@ -64,18 +64,20 @@ export interface CustomAddButtonProps {
 
 
 export interface Expense{
-  id: number;
-  name: number;
-  amount: number;
+  id: string;
+  name: string;
+  amount: string;
   description: string;
+  userId:string;
+  createdAt: string;
 }
 
 
 
 export interface CreateExpenseInput{
 
-   name: number;
-  amount: number;
+   name: string;
+  amount: string;
   description: string;
 
 }

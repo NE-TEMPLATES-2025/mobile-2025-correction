@@ -47,6 +47,9 @@ const handleLogin = async () => {
   // Load user from storage and dispatch
   const decodedUser = await storage.getUser();
   dispatch(loginSuccess({ token, user: decodedUser }));
+
+    // ✅ Show success alert
+  alert("Login successful!");
   router.replace("/(root)/(tabs)/home");
 };
 
@@ -102,7 +105,7 @@ const handleLogin = async () => {
        title='Sign In'
        containerStyle='w-full h-[60px] mb-6 justify-center bg-primary'
        iconRight={<ChevronLeftBlue/>}
-       onPress={()=>router.push("/(root)/(tabs)/home")}
+       onPress={handleLogin}
        />
 
        <Text className='text-gray-1 text-[14px] font-semibold mb-6 text-center'>Or Continue With</Text>

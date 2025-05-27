@@ -45,7 +45,7 @@ export const useGetAllExpensesQuery = () => {
     });
 }
 
-export const useGetExpenseByIdQuery = (id: number) => {
+export const useGetExpenseByIdQuery = (id: string) => {
     return useQuery({
         queryKey: [QUERY_KEYS.GET_EXPENSE_BY_ID, id],
         queryFn: () => expenses.getExpenseById(id),
@@ -56,7 +56,7 @@ export const useGetExpenseByIdQuery = (id: number) => {
 export const useCreateExpenseMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (data: CreateExpenseInput) => expenses.createExpense(data),
+        mutationFn: async(data: CreateExpenseInput) =>await expenses.createExpense(data),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: [QUERY_KEYS.GET_ALL_EXPENSES],
@@ -69,7 +69,7 @@ export const useCreateExpenseMutation = () => {
 export const useDeleteExpenseMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (id: number) => expenses.deleteExpense(id),
+        mutationFn: (id: string) => expenses.deleteExpense(id),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: [QUERY_KEYS.GET_ALL_EXPENSES],

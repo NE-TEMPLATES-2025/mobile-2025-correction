@@ -3,6 +3,7 @@ import {jwtDecode} from "jwt-decode"
 
 
 const key = "authToken";
+const userKey = "authUser";
 
 const storeToken= async(value:string)=>{
     try {
@@ -40,18 +41,34 @@ const removeToken= async ()=>{
 }
 
 const getUser = async ()=>{
-    const token= await getToken();
-    if(!token) return null;
-    const decoded: any= jwtDecode(token);
-    const isTokenExpired = decoded.exp *1000 < Date.now(); 
-    
-    return isTokenExpired  ? null : decoded;
+    try {
+        
+       return await SecureStore.getItemAsync(userKey);
+    } catch (error) {
+        console.error("Error while getting the user");
+    }
+    return null;
 }
+
+const storeUser = async (user: {
+  id: string;
+  username: string;
+  password: string;
+  createdAt: string;
+}) => {
+  try {
+    await SecureStore.setItemAsync(userKey, JSON.stringify(user));
+  } catch (error) {
+    console.error("Error while storing user", error);
+  }
+};
+
 
 
 export default {
     getToken,
     storeToken,
     getUser,
-    removeToken
+    removeToken,
+    storeUser
 }

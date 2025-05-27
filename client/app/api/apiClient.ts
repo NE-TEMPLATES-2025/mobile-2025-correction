@@ -13,7 +13,7 @@ export const apiClient= axios.create({
 
 
 export const protectedApiClient = axios.create({
-    baseURL: "http://10.12.73.224:4000/api/v1",
+    baseURL: "https://67ac71475853dfff53dab929.mockapi.io/api/v1",
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",

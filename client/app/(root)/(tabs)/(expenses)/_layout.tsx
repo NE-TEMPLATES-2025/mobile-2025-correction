@@ -8,8 +8,6 @@ const ExpensesLayout = () => {
         headerShown:false
     }}>
         <Stack.Screen name='expense'/>
-        <Stack.Screen name='register'/>
-        <Stack.Screen name='login'/>
     </Stack>
   )
 }

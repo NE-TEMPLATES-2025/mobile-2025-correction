@@ -5,6 +5,8 @@ import storage from "@/app/(onboarding)/storage";
 interface User {
     id:string;
     username:string;
+    password:string;
+    createdAt:string;
  
 }
 interface AuthState {
@@ -31,12 +33,13 @@ export const loadUserFromStorage= createAsyncThunk(
     }
 )
 
+
 const userSlice= createSlice({
   name:"user",
   initialState,
   reducers: {
 
-    loginSuccess:  (state,action)=>{
+    loginSuccess:(state,action)=>{
         state.token= action.payload.token;
         state.user= action.payload.user;
     },
@@ -53,7 +56,7 @@ const userSlice= createSlice({
     })
     builder.addCase(loadUserFromStorage.fulfilled, (state,action)=>{
         state.token= action.payload.token;
-        state.user= action.payload.user;
+        // state.user=action.payload.user
         state.isLoading=false;
     })
     builder.addCase(loadUserFromStorage.rejected,(state)=>{

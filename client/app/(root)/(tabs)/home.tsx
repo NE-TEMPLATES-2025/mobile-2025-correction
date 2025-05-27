@@ -97,7 +97,7 @@ const Home = () => {
               </Text>
               <View className="justify-start mt-4 w-[60%]">
                 <Text className="text-white text-[14px] font-semibold">
-                  Get a Discount for Parking only Valid for Today!
+                  Get  a clear view of your expenses with our new feature.
                 </Text>
               </View>
             </View>
@@ -144,7 +144,7 @@ const Home = () => {
               contentContainerStyle={{
                 flexGrow: 1,
                 justifyContent:
-                  expenses!.length === 1 ? "center" : "flex-start",
+                  expenses?.length === 1 ? "center" : "flex-start",
               }}
               className="mb-6"
               renderItem={({ item }) => (

@@ -39,7 +39,7 @@ const getAllExpenses= async ()=>{
 }
 
 
-const getExpenseById= async(id:number)=>{
+const getExpenseById= async(id:string)=>{
     try {
         const response= await protectedApiClient.get<Expense>(`/expenses/${id}`);
         if(response.status !== 200) {
@@ -55,7 +55,7 @@ const getExpenseById= async(id:number)=>{
     }
 }
 
-const editExpense= async(id:number,name:string,description:string,amount:number)=>{
+const editExpense= async(id:string,name:string,description:string,amount:number)=>{
     try {
         const expense=await getExpenseById(id);
         if(!expense) {
@@ -76,7 +76,7 @@ const editExpense= async(id:number,name:string,description:string,amount:number)
     }
 }
 
-const deleteExpense = async(id:number)=>{
+const deleteExpense = async(id:string)=>{
     try {
         await protectedApiClient.delete(`/expenses/${id}`);
         return { message: "expense deleted successfully" };
@@ -85,6 +85,8 @@ const deleteExpense = async(id:number)=>{
         throw new Error("Failed to delete expense");
     }
 }
+
+
 
 export default {
    getAllExpenses,

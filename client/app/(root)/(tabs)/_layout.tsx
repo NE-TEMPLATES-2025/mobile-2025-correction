@@ -4,6 +4,7 @@ import React from "react";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { StyleSheet } from "react-native";
+import Feather from '@expo/vector-icons/Feather';
 
 import Fontisto from '@expo/vector-icons/Fontisto';
 
@@ -29,10 +30,14 @@ const TabsLayout = () => {
         name="home"
         options={{
           title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="home" size={size} color={color} />
+          ),
         }}
       />
+
         <Tabs.Screen
-        name="expenses"
+        name="(expenses)"
         options={{
           title: "Expenses",
           tabBarIcon: ({color,size})=><Fontisto name="money-symbol" size={size} color={color} />,

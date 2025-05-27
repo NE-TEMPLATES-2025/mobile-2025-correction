@@ -13,8 +13,8 @@ export default function HomeScreen() {
   
 
 
-  //  if(isLoading) return null;
+   if(isLoading) return null;
 
- return <Redirect href="/(onboarding)/onboarding-screens"/>
-  // return   <Redirect href="/(root)/(tabs)/home"/>
+if(!token) return <Redirect href="/(onboarding)/onboarding-screens"/>
+  return   <Redirect href="/(root)/(tabs)/home"/>
 }
